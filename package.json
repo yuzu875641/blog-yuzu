@@ -1,0 +1,17 @@
+{
+  "name": "yuzutube",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "youtubei.js": "^2.10.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
