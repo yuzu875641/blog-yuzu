@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div style={{ padding: '20px' }}>
       <Head>
-        <title>Yuzutube</title>
+        <title>Yuzutube 🍋</title>
       </Head>
 
       <h1>Yuzutube 🍋</h1>
@@ -76,4 +76,4 @@ export default function Home() {
       )}
     </div>
   );
-  }
+              }
