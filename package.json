@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "youtubei.js": "^2.10.1",
+    "youtubei.js": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
