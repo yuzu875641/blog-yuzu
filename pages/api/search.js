@@ -15,20 +15,21 @@ export default async function handler(req, res) {
     const yt = await Innertube.create();
     const searchResults = await yt.search(query);
     
-    // 必要な情報のみをフィルタリングして返す
+    // オプショナルチェイニング `?.` を使って、プロパティの存在を確認
     const videos = searchResults.videos.map(video => ({
       id: video.id,
-      title: video.title.text,
-      thumbnail: video.thumbnails[0].url,
-      views: video.view_count.text,
-      author: video.author.name,
-      duration: video.duration.text
+      title: video.title?.text || null,
+      thumbnail: video.thumbnails?.[0]?.url || null,
+      views: video.view_count?.text || null,
+      author: video.author?.name || null,
+      duration: video.duration?.text || null
     }));
     
+    // 同様にプレイリストも修正
     const playlists = searchResults.playlists.map(playlist => ({
       id: playlist.id,
-      title: playlist.title.text,
-      video_count: playlist.video_count
+      title: playlist.title?.text || null,
+      video_count: playlist.video_count || null
     }));
 
     res.status(200).json({ videos, playlists });
