@@ -15,7 +15,11 @@ export default async function handler(req, res) {
     const yt = await Innertube.create();
     const videoInfo = await yt.getBasicInfo(videoId);
     
-    // 最も品質の高いmp4ストリームURLを取得
+    // streaming_dataが存在するかどうかをチェック
+    if (!videoInfo.streaming_data || !videoInfo.streaming_data.formats) {
+      return res.status(404).json({ message: 'No stream data available for this video' });
+    }
+
     const streamUrl = videoInfo.streaming_data.formats
       .filter(f => f.mime_type.startsWith('video/mp4'))
       .sort((a, b) => b.quality_label.localeCompare(a.quality_label))[0]?.url;
@@ -31,7 +35,7 @@ export default async function handler(req, res) {
       streamUrl: streamUrl
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Failed to get video information' });
+      console.error(error);
+      res.status(500).json({ message: 'Failed to get video information' });
   }
 }
